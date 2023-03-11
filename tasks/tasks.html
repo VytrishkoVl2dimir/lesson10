@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Home Work</title>
+</head>
+
+<body>
+	<h2>Розв`язок задач</h2>
+	<p>
+
+	</p>
+
+	<script>
+		// Функція, яка генерує рандомний масив
+		function getRandomArray(minValue, maxValue, valuesNumber) {
+			let randomArr = new Array(valuesNumber)
+			for (let i = 0; i < randomArr.length; i++) {
+				const randomNumber = minValue + Math.floor(Math.random() * (maxValue - minValue + 1))
+				randomArr[i] = randomNumber
+			}
+			return randomArr
+		}
+		const randomPrices = getRandomArray(1, 10000, 20)
+		document.write(`<h3>Дано рандомний масив цін</h3> ${randomPrices}<br>`)
+		//========================================================================================================================================================
+		document.write(`<h3>Задача 1 - Сформувати новий масив, у якому є тільки ті, що більші за 1000 грн.</h3><br>`)
+
+		// Формуємо новий масив, у якому є тільки ті, що більші за 1000 грн.
+		const arrGreaterThan_1000 = randomPrices.filter(price => price > 1000)
+		document.write(arrGreaterThan_1000)
+		//========================================================================================================================================================
+		document.write(`<h3>Задача 2 - Сформувати новий масив, у якому є номери тільки тих, що більші за 1000 грн.</h3><br>`)
+
+		// const arrIndexPricesGreaterThan_1000 = randomPrices.map((price, index) => price > 1000 ? index : '').filter(index => index)
+		const arrIndexPricesGreaterThan_1000 = randomPrices.reduce((prevPrice, price, index) => {
+			if (price > 1000) prevPrice.push(index)
+			return prevPrice
+		}, [])
+		document.write(arrIndexPricesGreaterThan_1000)
+		//========================================================================================================================================================
+		document.write(`<h3>Задача 3 - Сформувати список з тих цін, які більші за попереднє значення.</h3><br>`)
+
+		const pricesGreaterThanPrevious = randomPrices.reduce((prevPrice, price, index, baseArr) => {
+			if (price > baseArr[index - 1]) prevPrice.push(price)
+			return prevPrice
+		}, [])
+
+		document.write(pricesGreaterThanPrevious)
+		//========================================================================================================================================================
+		document.write(`<h3>Задача 4 - Сформувати новий масив, що міститиме значення цін у відсотках стосовно максимального.</h3><br>`)
+
+		const maxPrice = randomPrices.reduce((prevMax, price) => price > prevMax ? price : prevMax)
+		const priceInPercentageOfMax = randomPrices.map(price => Math.ceil(price * 100 / maxPrice))
+
+		document.write(priceInPercentageOfMax)
+		//========================================================================================================================================================
+		document.write(`<h3>Задача 5 - Підрахувати кількість змін цін.</h3><br>`)
+
+		const quantityChangingPrice = randomPrices.reduce((prevQuantity, price, index, baseArr) => price != baseArr[index - 1] ? prevQuantity + 1 : prevQuantity, 0)
+
+		document.write(quantityChangingPrice)
+		//========================================================================================================================================================
+		document.write(`<h3>Задача 6 - Визначити, чи є ціна, що менше 1000.</h3><br>`)
+
+		const checkPriceLessThan1000 = randomPrices.some(price => price < 1000)
+
+		document.write(checkPriceLessThan1000)
+		//========================================================================================================================================================
+		document.write(`<h3>Задача 7 - Визначати, чи усі ціни більше за 1000.</h3><br>`)
+
+		const checkPriceGreaterThan1000 = randomPrices.every(price => price > 1000)
+
+		document.write(checkPriceGreaterThan1000)
+		//========================================================================================================================================================
+		document.write(`<h3>Задача 8 - Підрахувати кількість цін, що більше за 1000.</h3><br>`)
+
+		const quantityPriceGreaterThan1000 = randomPrices.reduce((prevQuantity, price) => price > 1000 ? prevQuantity + 1 : prevQuantity, 0)
+
+		document.write(quantityPriceGreaterThan1000)
+		//========================================================================================================================================================
+		document.write(`<h3>Задача 9 - Підрахувати суму цін, що більше за 1000.</h3><br>`)
+
+		const sumPriceGreaterThan1000 = randomPrices.reduce((prevSum, price) => price > 1000 ? prevSum + price : prevSum, 0)
+
+		document.write(sumPriceGreaterThan1000)
+		//========================================================================================================================================================
+		document.write(`<h3>Задача 10 - Знайти першу ціну, що більше за 1000.</h3><br>`)
+
+		const firstPriceGreaterThan1000 = randomPrices.find(price => price > 1000)
+
+		document.write(firstPriceGreaterThan1000)
+		//========================================================================================================================================================
+		document.write(`<h3>Задача 11 - Знайти індекс першої ціни, що більше за 1000.</h3><br>`)
+
+		const indexFirstPriceGreaterThan1000 = randomPrices.findIndex((price, index) => price > 1000)
+
+		document.write(indexFirstPriceGreaterThan1000)
+		//========================================================================================================================================================
+		document.write(`<h3>Задача 12 - Знайти останню ціну, що більше за 1000.</h3><br>`)
+
+		const lastPriceGreaterThan1000 = randomPrices.findLast(price => price > 1000)
+
+		document.write(lastPriceGreaterThan1000)
+		//========================================================================================================================================================
+		document.write(`<h3>Задача 13 - Знайти індекс останньої ціни, що більше за 1000.</h3><br>`)
+
+		const indexLastPriceGreaterThan1000 = randomPrices.findLastIndex((price, index) => price > 1000)
+
+		document.write(indexLastPriceGreaterThan1000)
+		//========================================================================================================================================================
+
+	</script>
+	<style>
+		h2 {
+			color: #08368b;
+		}
+
+		h3 {
+			color: #06700f;
+		}
+
+		ul {
+			margin: 0;
+		}
+	</style>
+</body>
+
+</html>
